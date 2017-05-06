@@ -1,0 +1,25 @@
+\documentclass{word-lua}
+\usepackage{fontspec}
+\usepackage{pdfpages}
+\usepackage{luacode}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+
+\begin{luacode*}
+  START_PAGE = os.getenv"START_PAGE"
+
+  tex.sprint("\\setcounter{page}{", START_PAGE, "}")
+\end{luacode*}
+
+\fontspec[Mapping=tex-text, Ligatures={Common, Rare, Historic}]{Hoefler Text}
+\setmainfont[Ligatures=TeX]{Hoefler Text}
+
+\fancyfoot[LE]{\thepage}
+\fancyfoot[RO]{\thepage}
+\fancyfoot[C]{}
+
+\begin{document}
+\newgeometry{top=0mm, bottom=15mm, left=16mm, right=16mm}
+
+\includepdf[pages=-, pagecommand=\thispagestyle{fancy}]{src.pdf}
+\end{document}
